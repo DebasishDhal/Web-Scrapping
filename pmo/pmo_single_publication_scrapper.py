@@ -49,3 +49,39 @@ def content_extractor(soup):
     content = re.sub(r'\b[A-Z]+\s*$', '', content)
     content = re.sub(r'https?://\S+', '', content) #Remove links
     return content
+
+odia_chars = odia_chars = ['ଅ','ଆ','ଇ','ଈ','ଉ','ଊ','ଋ','ୠ','ଌ','ୡ','ଏ','ଐ','ଓ',
+                           'ଔ','କ','ଖ','ଗ','ଘ','ଙ','ଚ','ଛ','ଜ','ଝ','ଞ','ଟ','ଠ',
+                           'ଡ','ଢ','ଣ','ତ','ଥ','ଦ','ଧ','ନ','ପ','ଫ','ବ','ଭ','ମ',
+                           'ଯ','ୟ','ର','ଲ','ଳ','ଵ','ଶ','ଷ','ସ','ହ','କ୍ଷ','ଜ୍ଞ',
+                           'ଂ','ଃ','଼','ଽ','ା','ି','ୀ','ୁ','ୂ','ୃ','େ','ୈ','ୋ','ୌ',
+                           '୍','ୖ','ୗ','ଂ','ଃ','଼','ଽ','ା','ି','ୀ','ୁ','ୂ','ୃ','େ',
+                           'ୈ','ୋ','ୌ','୍','ୖ','ୗ','ଂ','ଃ','଼','ଽ','ା','ି','ୀ','ୁ','ୂ','ୃ', 'େ','ୈ','ୋ']
+
+def title_extractor(soup):
+    title_res = soup.find('div', class_='content-block clearfix content-loaded')
+    try:
+        title = title_res.find('h2').get_text(strip=True)
+        if not any(char in title for char in odia_chars):
+            return ''
+    except AttributeError:
+        title = ''
+            
+    return title
+
+def date_extractor(soup):
+    try:
+        date = soup.find('span', class_='date').get_text(strip=True)
+    except:
+        date = ''
+    return date
+
+url = 'https://www.pmindia.gov.in/ory/news_updates/%e0%ac%97%e0%ac%a4-%e0%ad%af-%e0%ac%ac%e0%ac%b0%e0%ad%8d%e0%ac%b7%e0%ac%b0%e0%ad%87-%e0%ac%aa%e0%ac%b0%e0%ac%bf%e0%ac%ac%e0%ac%b0%e0%ad%8d%e0%ac%a4%e0%ad%8d%e0%ac%a4%e0%ac%a8%e0%ac%b0-%e0%ac%a4/?comment=disable'
+if __name__ == '__main__':
+    soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+    main_content = content_extractor(soup)
+    title_content = title_extractor(soup)
+    date_extractor = date_extractor(soup)
+
+
+    
