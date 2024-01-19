@@ -22,7 +22,9 @@ links_to_scrap = [link for link in links_to_scrap if link not in scrapped_links_
 batch_text = '' 
 count = len(scrapped_links_global)
 
+set_element_covered = 0
 for link in links_to_scrap:
+    set_element_covered += 1
     with open('/content/gdrive/MyDrive/ACL2024/Data/pmo_odia_created/pmo_all_dumped.txt', 'r', encoding = 'utf-8') as existing:
         existing_text = existing.read()
 
@@ -32,7 +34,7 @@ for link in links_to_scrap:
     if link in scrapped_links_global:
         continue
 
-    print(link.strip())
+    # print(link.strip())
     if 'https://www.pmindia.gov.in/ory/news_updates/' not in link: #ensure that the content is in Odia
         continue
     try:
@@ -50,7 +52,7 @@ for link in links_to_scrap:
     date = date_extractor(soup)
     content = content_extractor(soup)
     if content == '':
-        print('Content not scrapped')
+        print('Content not scrapped: '+str(link), end ='\r')
         continue
     if title != '':title = 'ଶୀର୍ଷକ : ' + title
 
@@ -65,11 +67,11 @@ for link in links_to_scrap:
     scrapped_links_global.append(link)
     scrapped_links_global = '\n'.join(scrapped_links_global).strip()
 
-    print(f"Existing token count = {len(existing_text.split())}, Date = {date}")
+    # print(f"Existing token count = {len(existing_text.split())}, Date = {date}")
 
     with open('/content/gdrive/MyDrive/ACL2024/Data/pmo_odia_created/pmo_all_dumped.txt', 'w', encoding = 'utf-8') as new:
         new.write(existing_text)
     with open('/content/gdrive/MyDrive/ACL2024/Data/pmo_odia_created/pmo_link_scrapped.txt', 'w') as new:
         new.write(scrapped_links_global)
 
-    print(count, end = '\n\n')
+    print(f"Links visited = {set_element_covered:,},Successfully processed = {count:,}, Token = {len(existing_text.split()):,}, Sentence = {existing_text.count('।'):,}, Date = {date}", end='\n\n')
