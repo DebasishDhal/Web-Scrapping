@@ -10,7 +10,7 @@ context_specific_links = []
 interrupted = False
 for i in range(25, upper_limit, 25):
     if i%500==0:
-        print('Fetched', i, ' pages', end = '\r')
+        print('Fetched ', i, ' links', end = '\r')
     try:
         main_url = 'https://otvkhabar.in/national/'+str(i) #
         main_soup = BeautifulSoup(requests.get(main_url).text, 'html.parser')
