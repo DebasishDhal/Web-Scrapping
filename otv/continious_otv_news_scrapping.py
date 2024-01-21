@@ -13,13 +13,15 @@ with open('Adress of collection of links that have already been scrapped', 'r', 
 with open('Adress of your combined scrapped text', 'r', encoding = 'utf-8') as f:
   existing_text = f.read()
 
-links_to_scrap = [link for link in links_to_scrap if link not in scrapped_links_global]
+# links_to_scrap = [link for link in links_to_scrap if link not in scrapped_links_global]
 print('Session begins: -')
-print(f'Links pending = {len(links_to_scrap)}')
 print(f'Links already scrapped = {len(scrapped_links_global)}')
 
 links_visited = 0
-for link in links_to_scrap:
+head_start = 0 #If you want to start from a particular index, to save time.
+
+links_visited += head_start
+for link in links_to_scrap[head_start:]:
   links_visited += 1
 
   with open('Adress of collection of links that have already been scrapped', 'r', encoding = 'utf-8') as f:
@@ -39,7 +41,7 @@ for link in links_to_scrap:
   
   existing_text = existing_text + '\n' + new_text
   scrapped_links_global.append(link)
-  print( f"Links visited={links_visited:,}, Tokens collected={len(existing_text.split()):,}, Sentence count = {existing_text.count('।'):,} ,Links scrapped = {len(scrapped_links_global):,}") 
+  print( f"Links visited={links_visited:,}, Tokens collected={len(existing_text.split()):,}, Sentence count = {existing_text.count('।'):,} , Links scrapped = {len(scrapped_links_global):,}") 
 
   scrapped_links_global = '\n'.join(scrapped_links_global).strip()
 
