@@ -6,8 +6,8 @@
   - Loading the links from PMO website.
   - Scrapping a given link.
 
-- Most of the time was spent in loading all the links, since the website is dynamically loaded. So I used Selenium library to continiously scroll down for a full-night.
+- Most of the time was spent in loading all the links, since the website is dynamically loaded. I used Selenium library to continiously scroll down for a full-night. Around 50K article links were collected.
 
-- This has its limit. The older links (before 2019) do not scrapped easily. They throw plenty of errors. 
+- This has its limit. The older links (before 2019) do not get scrapped easily. They throw plenty of errors. 
 
-- Of the collected links, 2/3rd part was successfully scrapped.
+- 66% of the PMO links that we had collected were successfully scrapped. 
