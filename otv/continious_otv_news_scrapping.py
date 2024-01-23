@@ -41,7 +41,8 @@ for link in links_to_scrap[head_start:]:
   
   existing_text = existing_text + '\n' + new_text
   scrapped_links_global.append(link)
-  print( f"Links visited={links_visited:,}, Tokens collected={len(existing_text.split()):,}, Sentence count = {existing_text.count('।'):,} , Links scrapped = {len(scrapped_links_global):,}") 
+  length_scrapped_links_global = len(scrapped_links_global)
+  print( f"Links visited={links_visited:,}, Tokens collected={len(existing_text.split()):,}, Sentence count = {existing_text.count('।'):,} , Links scrapped = {length_scrapped_links_global:,}, Success = {100*length_scrapped_links_global/links_visited:.4f}")
 
   scrapped_links_global = '\n'.join(scrapped_links_global).strip()
 
