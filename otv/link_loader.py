@@ -1,5 +1,5 @@
 #This gives you all the links of a particular theme (national-news, sports, information etc.) from OTV website.
-#You pick the topic and change the main_url in for loop accordingly. Then enter the upper limit of page for that topic.
+#You pick the topic and change the main_url in for loop accordingly. Then enter the upper limit of page for that topic. Upper limit is the number of pages for that topic on OTV website.
 
 import requests
 from bs4 import BeautifulSoup
