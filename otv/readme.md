@@ -14,5 +14,5 @@ The process of scrapping is divided into the following parts: -
 
 - 9M tokens were scrapped in total through this method.
 - The only problem is that Colab has a memory issue. The disk gets filled up rapidly, even though I am not saving much in the colab disk space (~100GB).
-- And rapidly reading and writing files on Drive causes some problems.
+- And rapidly reading and writing files on Drive causes some problems. The frequency should be 1 read-write/second. As the scrapped file gets bigger, we're reading, modifying and writing 100MB of text on Drive, every second.
 - I'd say it's best to do this on your local system.
